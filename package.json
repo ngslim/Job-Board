@@ -2,9 +2,10 @@
   "name": "job-board",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect src/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/ngslim/Job-Board/issues"
   },
-  "homepage": "https://github.com/ngslim/Job-Board#readme"
+  "homepage": "https://github.com/ngslim/Job-Board#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
 }
