@@ -1,16 +1,34 @@
 @import 'variables';
 
-.test {
-  font-size: 1rem;
-  background-color: red;
-  width: 100px;
+.navbar {
+  color: $color-primary;
 }
 
-h1 {
-  color: $red-color;
+.text-main {
+  color: $color-primary;
 }
 
-.card {
+.text-sub {
+  color: $color-secondary;
+}
+
+.text-variant {
+  color: $color-variant;
+}
+
+.bg-main {
+  background-color: $color-primary;
+}
+
+.bg-sub {
+  background-color: $color-secondary;
+}
+
+.bg-variant {
+  background-color: $color-variant;
+}
+
+.card-category {
   height: 250px;
   width: 250px;
   border-radius: 50px !important;
@@ -22,12 +40,12 @@ h1 {
   transition: 0.5s;
 }
 
-.card:hover {
+.card-category:hover {
   transform: scale(1.05);
-  background: #28a745;
+  background: $color-primary;
 }
 
-.card:hover .card-title {
+.card-category:hover .card-title {
   color: white;
 }
 
@@ -38,7 +56,7 @@ h1 {
   color: white;
   font-weight: 500;
   text-align: center;
-  background: #28a745;
+  background: $color-primary;
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
     0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
@@ -63,7 +81,7 @@ h1 {
 
 .card-step:hover {
   transform: scale(1.05);
-  background: #28a745;
+  background: $color-primary;
 }
 
 .card-step:hover .card-title {
