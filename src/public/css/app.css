@@ -11,13 +11,15 @@
   color: #a370f7; }
 
 .bg-main {
-  background-color: #d63384; }
+  background-color: #d63384;
+  background-image: linear-gradient(315deg, #d63384 0%, #f7d6e6 90%); }
 
 .bg-sub {
   background-color: #f7d6e6; }
 
 .bg-variant {
-  background-color: #a370f7; }
+  background-color: #a370f7;
+  background-image: linear-gradient(315deg, #a370f7 0%, #d63384 90%); }
 
 .card-category {
   height: 250px;
@@ -64,3 +66,82 @@
 
 .card-step:hover .card-title {
   color: white; }
+
+.login-container {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 600px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.login-card {
+  width: 400px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  padding: 40px; }
+
+.login-card h1 {
+  text-align: center; }
+
+.login-card .form-control {
+  width: 100%;
+  border: none;
+  position: relative;
+  margin-top: 40px; }
+
+.login-card .form-control input {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid; }
+
+.login-card .form-control span {
+  position: absolute;
+  border-bottom: 3px solid #a370f7;
+  top: 43px;
+  left: 12px;
+  width: 0%;
+  transition: 0.3s; }
+
+.login-card .form-control input:focus ~ span {
+  width: 93%; }
+
+.login-card .form-control.error small {
+  color: #ff0000; }
+
+.login-card .form-control.error input {
+  color: #ff0000;
+  border-bottom: 3px solid #ff0000; }
+
+.login-card button {
+  margin-top: 25px;
+  margin-left: 12px;
+  width: 93%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.3s; }
+
+.login-card button:hover {
+  transform: scale(1.03);
+  opacity: 95%; }
+
+.login-card .register-link {
+  margin-top: 25px;
+  text-align: center; }
+
+.login-card .register-link a {
+  color: #a370f7;
+  cursor: pointer;
+  text-decoration: none; }

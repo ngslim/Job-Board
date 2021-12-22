@@ -16,7 +16,12 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, './resources/views'));
 
 app.get('/', (req, res) => res.render('home'));
-app.get('/news', (req, res) => res.render('news'));
+app.get('/login', (req, res) =>
+  res.render('login', { title: 'Log In', layout: 'null' })
+);
+app.get('/register', (req, res) =>
+  res.render('register', { title: 'Register', layout: 'null' })
+);
 app.get('/explore', (req, res) => res.render('explore'));
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
