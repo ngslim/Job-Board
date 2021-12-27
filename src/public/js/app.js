@@ -18,7 +18,6 @@ function checkEmpty(listInput) {
       isEmpty = true;
       showError(input, 'Must enter something');
     } else {
-      console.log(input.value);
       showSuccess(input);
     }
   });
@@ -83,7 +82,8 @@ if (loginForm) {
     const username = document.querySelector('#username');
     const password = document.querySelector('#password');
     e.preventDefault();
-    checkEmpty([username, password]);
+    if (checkEmpty([username, password])) return;
+    loginForm.submit();
   });
 }
 
@@ -94,10 +94,10 @@ if (registerForm) {
     const confirmPassword = document.querySelector('#confirm-password');
     const email = document.querySelector('#email');
     e.preventDefault();
-    checkEmpty([username, email, password, confirmPassword]);
-    checkEmail(email);
-    checkLength(username, 6, 25);
-    checkLength(password, 6, 25);
-    checkConfirmPassword(password, confirmPassword);
+    if (checkEmpty([username, email, password, confirmPassword])) return;
+    if (checkEmail(email)) return;
+    if (checkLength(username, 6, 25)) return;
+    if (checkLength(password, 6, 25)) return;
+    if (checkConfirmPassword(password, confirmPassword)) return;
   });
 }
