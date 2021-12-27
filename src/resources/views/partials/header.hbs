@@ -18,10 +18,10 @@
           <a class='nav-link' href='/explore'>Explore</a>
         </li>
         <li class='nav-item'>
-          <a class='nav-link disabled'>POST A JOB</a>
+          <a id='post-a-job' href='/explore' class='nav-link {{#unless session.User}} disabled {{/unless}}'>POST A JOB</a>
         </li>
         <li class='nav-item'>
-          <a class='nav-link disabled'>My jobs</a>
+          <a id='my-jobs' href='/explore' class='nav-link {{#unless session.User}} disabled {{/unless}}'>My jobs</a>
         </li>
       </ul>
       {{#if session.User}}

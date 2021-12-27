@@ -2,19 +2,40 @@
   <div class='login-card'>
     <a href='/' class='btn'><i class='bi bi-arrow-left'></i></a>
     <h1>Register</h1>
-    <form id='register-form'>
+    {{#if message}}
+      <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+        {{message}}
+        <div
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Close'
+        ></div>
+      </div>
+    {{/if}}
+    <form method='post' action='/create' id='register-form'>
       <div class='form-control'>
-        <input id='username' type='text' placeholder='username' />
+        <input
+          id='username'
+          name='username'
+          type='text'
+          placeholder='username'
+        />
         <small></small>
         <span></span>
       </div>
       <div class='form-control'>
-        <input id='email' type='email' placeholder='email' />
+        <input id='email' name='email' type='email' placeholder='email' />
         <small></small>
         <span></span>
       </div>
       <div class='form-control'>
-        <input id='password' type='password' placeholder='password' />
+        <input
+          id='password'
+          name='password'
+          type='password'
+          placeholder='password'
+        />
         <small></small>
         <span></span>
       </div>

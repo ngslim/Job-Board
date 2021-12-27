@@ -60,13 +60,13 @@ function checkLength(input, min, max) {
 
   if (input.value.length < min) {
     showError(input, `Must has at least ${min} letters`);
-    return false;
+    return true;
   } else if (input.value.length > max) {
     showError(input, `Must has at most ${max} letters`);
-    return false;
+    return true;
   }
   showSuccess(input);
-  return true;
+  return false;
 }
 
 function showSuccess(input) {
@@ -93,11 +93,14 @@ if (registerForm) {
     const password = document.querySelector('#password');
     const confirmPassword = document.querySelector('#confirm-password');
     const email = document.querySelector('#email');
+    console.log(username.value, password.value, email.value);
     e.preventDefault();
     if (checkEmpty([username, email, password, confirmPassword])) return;
-    if (checkEmail(email)) return;
+    if (!checkEmail(email)) return;
     if (checkLength(username, 6, 25)) return;
     if (checkLength(password, 6, 25)) return;
-    if (checkConfirmPassword(password, confirmPassword)) return;
+    if (!checkConfirmPassword(password, confirmPassword)) return;
+    registerForm.submit();
+    console.log('Submited');
   });
 }

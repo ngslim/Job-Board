@@ -3,6 +3,7 @@ const express = require('express');
 const siteRouter = require('./site');
 const jobRouter = require('./job');
 const authRouter = require('./auth');
+const userRouter = require('./user');
 
 module.exports = function (app) {
   app.use((req, res, next) => {
@@ -16,6 +17,7 @@ module.exports = function (app) {
   });
 
   app.use('/explore', jobRouter);
+  app.use('/', userRouter);
   app.use('/', authRouter);
   app.use('/', siteRouter);
 };
