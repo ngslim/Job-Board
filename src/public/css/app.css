@@ -38,7 +38,7 @@
   color: white; }
 
 .card-join {
-  width: 250px;
+  width: 350px;
   border: 5px solid white;
   font-size: 40px;
   color: white;
@@ -154,3 +154,80 @@
   color: #a370f7;
   cursor: pointer;
   text-decoration: none; }
+
+.post-register-container {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 700px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.post-register-card {
+  width: 800px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  padding: 40px; }
+
+.post-register-card h1 {
+  text-align: center; }
+
+.post-register-card .form-control {
+  width: 100%;
+  border: none;
+  position: relative;
+  margin-top: 40px; }
+
+.post-register-card .form-control input {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid; }
+
+.post-register-card .form-control span {
+  position: absolute;
+  border-bottom: 3px solid #a370f7;
+  top: 68px;
+  left: 12px;
+  width: 0%;
+  transition: 0.3s; }
+
+.post-register-card .form-control input:focus ~ span {
+  width: 93%; }
+
+.post-register-card .form-control.error small {
+  color: #ff0000; }
+
+.post-register-card .form-control.error input {
+  color: #ff0000;
+  border-bottom: 3px solid #ff0000; }
+
+.post-register-card button {
+  margin-top: 30px;
+  margin-left: 184px;
+  width: 50%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.3s; }
+
+.post-register-card button:hover {
+  transform: scale(1.03);
+  opacity: 95%; }
+
+.gradient-text {
+  text-transform: uppercase;
+  background: linear-gradient(to right, #d63384 0%, #a370f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 300px; }

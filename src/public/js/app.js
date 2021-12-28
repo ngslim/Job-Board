@@ -1,6 +1,7 @@
 //login functions
 const loginForm = document.querySelector('#login-form');
 const registerForm = document.querySelector('#register-form');
+const postRegisterForm = document.querySelector('#post-register-form');
 
 function showError(input, message) {
   let parent = input.parentElement;
@@ -16,7 +17,7 @@ function checkEmpty(listInput) {
     input.value = input.value.trim();
     if (!input.value) {
       isEmpty = true;
-      showError(input, 'Must enter something');
+      showError(input, 'Không được để trống');
     } else {
       showSuccess(input);
     }
@@ -36,7 +37,7 @@ function checkEmail(input) {
   if (validEmail) {
     showSuccess(input);
   } else {
-    showError(input, 'Email invalid');
+    showError(input, 'Email không hợp lệ');
   }
 
   return validEmail;
@@ -47,7 +48,7 @@ function checkConfirmPassword(input, confirmInput) {
   confirmInput.value = confirmInput.value.trim();
 
   if (input.value != confirmInput.value) {
-    showError(confirmInput, "Password doesn't match");
+    showError(confirmInput, 'Mật khẩu không khớp');
     return false;
   }
 
@@ -59,10 +60,10 @@ function checkLength(input, min, max) {
   input.value = input.value.trim();
 
   if (input.value.length < min) {
-    showError(input, `Must has at least ${min} letters`);
+    showError(input, `Tối thiểu ${min} ký tự`);
     return true;
   } else if (input.value.length > max) {
-    showError(input, `Must has at most ${max} letters`);
+    showError(input, `Tối đa ${max} ký tự`);
     return true;
   }
   showSuccess(input);
@@ -93,7 +94,6 @@ if (registerForm) {
     const password = document.querySelector('#password');
     const confirmPassword = document.querySelector('#confirm-password');
     const email = document.querySelector('#email');
-    console.log(username.value, password.value, email.value);
     e.preventDefault();
     if (checkEmpty([username, email, password, confirmPassword])) return;
     if (!checkEmail(email)) return;
@@ -101,6 +101,21 @@ if (registerForm) {
     if (checkLength(password, 6, 25)) return;
     if (!checkConfirmPassword(password, confirmPassword)) return;
     registerForm.submit();
-    console.log('Submited');
+  });
+}
+
+if (postRegisterForm) {
+  postRegisterForm.addEventListener('submit', function (e) {
+    const firstname = document.querySelector('#firstname');
+    const lastname = document.querySelector('#lastname');
+    const address = document.querySelector('#address');
+    const school = document.querySelector('#school');
+    const phone = document.querySelector('#phone');
+    const dob = document.querySelector('#dob');
+
+    e.preventDefault();
+
+    if (checkEmpty([firstname, lastname])) return;
+    postRegisterForm.submit();
   });
 }

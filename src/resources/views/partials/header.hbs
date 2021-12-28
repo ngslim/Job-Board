@@ -15,13 +15,13 @@
     <div class='collapse navbar-collapse' id='navbarSupportedContent'>
       <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
         <li class='nav-item'>
-          <a class='nav-link' href='/explore'>Explore</a>
+          <a class='nav-link' href='/explore'>Khám phá</a>
         </li>
         <li class='nav-item'>
-          <a id='post-a-job' href='/explore' class='nav-link {{#unless session.User}} disabled {{/unless}}'>POST A JOB</a>
+          <a id='post-a-job' href='/explore' class='nav-link {{#unless session.User}} disabled {{/unless}}'>ĐĂNG VIỆC</a>
         </li>
         <li class='nav-item'>
-          <a id='my-jobs' href='/explore' class='nav-link {{#unless session.User}} disabled {{/unless}}'>My jobs</a>
+          <a id='my-jobs' href='/explore' class='nav-link {{#unless session.User}} disabled {{/unless}}'>Công việc của tôi</a>
         </li>
       </ul>
       {{#if session.User}}
@@ -33,25 +33,26 @@
             data-bs-toggle='dropdown'
             aria-expanded='false'
           >
-            Welcome,
+            Xin chào,
             {{session.User.username}}
           </button>
           <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-            <li><a class='dropdown-item' href='/profile'>My profile</a></li>
-            <li><a class='dropdown-item' href='/logout'>Logout</a></li>
+            <li><a class='dropdown-item' href='/profile?q={{session.User.username}}'>Hồ sơ của tôi</a></li>
+            <li><a class='dropdown-item' href='/settings'>Cài đặt</a></li>
+            <li><a class='dropdown-item' href='/logout'>Đăng xuất</a></li>
           </ul>
         </div>
       {{else}}
         <a
           class='btn btn-outline-light me-3'
-          style='width: 100px;'
+          style='width: 120px;'
           href='/login'
-        >Login</a>
+        >Đăng nhập</a>
         <a
           class='btn btn-outline-light me-3'
-          style='width: 100px;'
+          style='width: 120px;'
           href='/register'
-        >Register</a>
+        >Đăng ký</a>
       {{/if}}
     </div>
   </div>

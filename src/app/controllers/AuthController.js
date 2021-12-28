@@ -6,7 +6,7 @@ class AuthController {
     if (req.session.User) {
       res.redirect('/');
     }
-    res.locals = { title: 'Login', layout: 'null' };
+    res.locals = { title: 'Đăng nhập', layout: 'null' };
     res.render('login');
   }
   //[POST] /verify
@@ -20,16 +20,16 @@ class AuthController {
 
     if (user === null) {
       res.locals = {
-        title: 'Login',
+        title: 'Đăng nhập',
         layout: 'null',
-        message: 'Account does not exist',
+        message: 'Tài khoản không tồn tại',
       };
       res.render('login');
     } else if (user.password !== _password) {
       res.locals = {
-        title: 'Login',
+        title: 'Đăng nhập',
         layout: 'null',
-        message: 'Wrong password',
+        message: 'Sai mật khẩu',
       };
       res.render('login');
     } else {
@@ -46,7 +46,7 @@ class AuthController {
     if (req.session.User) {
       res.redirect('/');
     }
-    res.locals = { title: 'Register', layout: 'null' };
+    res.locals = { title: 'Đăng ký', layout: 'null' };
     res.render('register');
   }
 
@@ -70,15 +70,23 @@ class AuthController {
         username: _username,
       };
       res.locals.session = req.session;
-      res.redirect('/');
+      res.redirect('/post-register');
     } else {
       res.locals = {
-        title: 'Register',
+        title: 'Đăng ký',
         layout: 'null',
-        message: 'This username has been used',
+        message: 'Username đã được sử dụng',
       };
       res.render('register');
     }
+  }
+
+  post_register(req, res) {
+    if (!req.session.User) {
+      res.redirect('/');
+    }
+    res.locals = { ...res.locals, title: 'Đăng ký' };
+    res.render('post-register', { layout: 'null' });
   }
 
   logout(req, res) {
