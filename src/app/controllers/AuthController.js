@@ -50,7 +50,7 @@ class AuthController {
     res.render('register');
   }
 
-  // [POST] /create
+  // [POST] /create-user
   async create(req, res, next) {
     const _username = req.body.username;
     const _email = req.body.email;

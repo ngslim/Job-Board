@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const User = new Schema({
-  username: { type: String, default: 'Không xác định' },
-  password: { type: String, default: 'Không xác định' },
-  lastname: { type: String, default: 'Không xác định' },
-  firstname: { type: String, default: 'Không xác định' },
-  dob: { type: String, default: 'Không xác định' },
-  address: { type: String, default: 'Không xác định' },
-  school: { type: String, default: 'Không xác định' },
-  phone: { type: String, default: 'Không xác định' },
-  email: { type: String, default: 'Không xác định' },
+  username: { type: String, default: '' },
+  password: { type: String, default: '' },
+  lastname: { type: String, default: '' },
+  firstname: { type: String, default: '' },
+  dob: { type: String, default: '' },
+  address: { type: String, default: '' },
+  school: { type: String, default: '' },
+  phone: { type: String, default: '' },
+  email: { type: String, default: '' },
   created: { type: Date, default: Date.now },
 });
 

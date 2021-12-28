@@ -12,6 +12,12 @@ class SiteController {
     res.locals = { ...res.locals, title: 'Error' };
     res.render('error');
   }
+
+  // [GET] /test
+  test(req, res) {
+    res.locals = { ...res.locals, title: 'Test' };
+    res.render('test');
+  }
 }
 
 module.exports = new SiteController();

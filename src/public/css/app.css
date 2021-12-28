@@ -131,7 +131,6 @@
 
 .login-card button {
   margin-top: 25px;
-  margin-left: 12px;
   width: 93%;
   height: 50px;
   border: none;
@@ -210,7 +209,6 @@
 
 .post-register-card button {
   margin-top: 30px;
-  margin-left: 184px;
   width: 50%;
   height: 50px;
   border: none;
@@ -231,3 +229,20 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 300px; }
+
+.card .job-button {
+  margin-top: 25px;
+  margin-left: 12px;
+  width: 500px;
+  height: 75px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  transition: 0.3s; }
+
+.card .job-button:hover {
+  transform: scale(1.03);
+  opacity: 95%; }

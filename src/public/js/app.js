@@ -70,6 +70,25 @@ function checkLength(input, min, max) {
   return false;
 }
 
+function checkPhone(input) {
+  if (!input.value) {
+    return true;
+  }
+
+  const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/i;
+  input.value = input.value.trim();
+
+  let validPhone = regex.test(input.value);
+
+  if (validPhone) {
+    showSuccess(input);
+  } else {
+    showError(input, 'Số điện thoại không hợp lệ');
+  }
+
+  return validPhone;
+}
+
 function showSuccess(input) {
   let parent = input.parentElement;
   let small = parent.querySelector('small');
@@ -116,6 +135,7 @@ if (postRegisterForm) {
     e.preventDefault();
 
     if (checkEmpty([firstname, lastname])) return;
+    if (!checkPhone(phone)) return;
     postRegisterForm.submit();
   });
 }
