@@ -25,6 +25,7 @@ class UserController {
   update(req, res, next) {
     if (!req.session.User) {
       res.redirect('/');
+      return;
     }
 
     if (req.body.dob !== '') {

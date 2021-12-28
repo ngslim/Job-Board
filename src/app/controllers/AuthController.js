@@ -5,6 +5,7 @@ class AuthController {
   login(req, res) {
     if (req.session.User) {
       res.redirect('/');
+      return;
     }
     res.locals = { title: 'Đăng nhập', layout: 'null' };
     res.render('login');
@@ -45,6 +46,7 @@ class AuthController {
   register(req, res) {
     if (req.session.User) {
       res.redirect('/');
+      return;
     }
     res.locals = { title: 'Đăng ký', layout: 'null' };
     res.render('register');
@@ -84,6 +86,7 @@ class AuthController {
   post_register(req, res) {
     if (!req.session.User) {
       res.redirect('/');
+      return;
     }
     res.locals = { ...res.locals, title: 'Đăng ký' };
     res.render('post-register', { layout: 'null' });
