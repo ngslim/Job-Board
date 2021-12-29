@@ -19,7 +19,7 @@ app.use(
 );
 
 //HTTP logger
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 //Connect database
 const db = require('./config/db');
