@@ -11,12 +11,13 @@ class UserController {
       .lean()
       .exec();
 
-    res.locals = { ...res.locals, title: 'Hồ sơ', user: user };
-
     if (user === null) {
+      res.locals = { ...res.locals, title: 'Hồ sơ' };
       res.render('error');
       return;
     }
+
+    res.locals = { ...res.locals, title: 'Hồ sơ', user: user };
 
     res.render('profile');
   }
