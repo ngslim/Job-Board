@@ -1,3 +1,4 @@
+const session = require('express-session');
 const User = require('../models/User');
 
 class SiteController {
@@ -7,9 +8,27 @@ class SiteController {
     res.render('home');
   }
 
-  // [GET] /error
+  // [GET] /404
+  error_404(req, res) {
+    res.locals = { ...res.locals, title: 'Lỗi' };
+    res.render('404');
+  }
+
+  // [GET] /no-job
+  error_no_job(req, res) {
+    res.locals = { ...res.locals, title: 'Lỗi' };
+    res.render('no-job');
+  }
+
+  // [GET] /no-apply
+  error_no_apply(req, res) {
+    res.locals = { ...res.locals, title: 'Lỗi' };
+    res.render('no-apply');
+  }
+
+  // [GET] /error-apply
   error(req, res) {
-    res.locals = { ...res.locals, title: 'Error' };
+    res.locals = { ...res.locals, title: 'Lỗi' };
     res.render('error');
   }
 

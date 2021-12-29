@@ -126,13 +126,13 @@
       <div class='card'>
         <div class='list-group list-group-flush'>
           {{#each jobs}}
-          <a href='' class='list-group-item'>
-            <h3>{{name}}</h3>
-            <p>{{description}}</p>
-            <h5><b>Lương:&nbsp;</b>{{this.salary}}</h5>
-            <h5><b>Vị trí:&nbsp;</b>{{this.location}}</h5>
-            <h5><b>Đăng bởi:&nbsp;</b>{{this.posted_by}}</h5>
-          </a>
+            <a href='/explore/job?_id={{this._id}}' class='list-group-item'>
+              <h3>{{this.name}}</h3>
+              <p>{{this.description}}</p>
+              <h5><b>Lương:&nbsp;</b>{{this.salary}}</h5>
+              <h5><b>Vị trí:&nbsp;</b>{{this.location}}</h5>
+              <h5><b>Đăng bởi:&nbsp;</b>{{this.posted_by}}</h5>
+            </a>
           {{/each}}
         </div>
       </div>

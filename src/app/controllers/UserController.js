@@ -13,7 +13,7 @@ class UserController {
 
     if (user === null) {
       res.locals = { ...res.locals, title: 'Hồ sơ' };
-      res.render('error');
+      res.render('404');
       return;
     }
 

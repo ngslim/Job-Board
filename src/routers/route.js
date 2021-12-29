@@ -4,6 +4,7 @@ const siteRouter = require('./site');
 const jobRouter = require('./job');
 const authRouter = require('./auth');
 const userRouter = require('./user');
+const applyRouter = require('./apply');
 
 module.exports = function (app) {
   app.use((req, res, next) => {
@@ -17,6 +18,7 @@ module.exports = function (app) {
   });
 
   app.use('/explore', jobRouter);
+  app.use('/apply', applyRouter);
   app.use('/', userRouter);
   app.use('/', authRouter);
   app.use('/', siteRouter);
