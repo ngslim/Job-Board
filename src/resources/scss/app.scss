@@ -16,6 +16,25 @@
   color: $color-variant;
 }
 
+.row a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.row a:hover {
+  color: white;
+}
+
+.card a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.card a:hover {
+  color: $color-primary;
+}
+
 .bg-main {
   background-color: $color-primary;
   background-image: linear-gradient(

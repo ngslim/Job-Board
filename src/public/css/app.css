@@ -10,6 +10,21 @@
 .text-variant {
   color: #a370f7; }
 
+.row a {
+  cursor: pointer;
+  text-decoration: none; }
+
+.row a:hover {
+  color: white; }
+
+.card a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none; }
+
+.card a:hover {
+  color: #d63384; }
+
 .bg-main {
   background-color: #d63384;
   background-image: linear-gradient(315deg, #d63384 0%, #f7d6e6 90%); }
