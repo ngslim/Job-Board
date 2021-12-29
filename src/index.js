@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const app = express();
-const port = 9999;
+const port = 8888;
 const session = require('express-session');
 const helpers = require('handlebars-helpers')();
 
