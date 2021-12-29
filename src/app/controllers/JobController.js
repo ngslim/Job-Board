@@ -8,6 +8,7 @@ class JobController {
   index(req, res, next) {
     Job.find({})
       .lean()
+      .exec()
       .then(jobs => {
         res.locals = { ...res.locals, title: 'Khám phá', jobs: jobs };
         res.render('explore');})
@@ -152,6 +153,21 @@ class JobController {
 
     res.locals = { ...res.locals, title: 'Công việc của tôi', jobs: jobs };
     res.render('my-jobs');
+  }
+
+  // [GER] /explore/search?name=
+  async search_jobs(req, res, next) {
+    const _name = req.query.name;
+    await Job.find({
+      name: _name,
+    })
+      .lean()
+      .exec()
+      .then(jobs => {
+        console.log(jobs)
+        res.locals = { ...res.locals, title: 'Khám phá', jobs: jobs };
+        res.render('explore');})
+      .catch(next)
   }
 }
 
