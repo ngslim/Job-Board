@@ -37,6 +37,7 @@ class ApplyController {
       title: 'Danh sách đã ứng tuyển',
       applyInfos: applyInfos,
     };
+
     res.render('my-applies');
 
     // res.locals = { ...res.locals, title: 'Ứng tuyển đã gửi' };
@@ -45,21 +46,38 @@ class ApplyController {
 
   // [POST] /apply/apply-job?_id=_id
   async apply_job(req, res) {
+    const __id = req.query._id;
+
     if (!req.session.User) {
-      res.redirect('/');
+      res.redirect('/login');
       return;
     }
 
-    const __id = req.query._id;
     const _username = req.session.User.username;
 
     if (_username == req.body.job_owner) {
-      res.redirect('/apply/my-applies');
+      res.locals = {
+        ...res.locals,
+        title: 'Lỗi',
+        message: 'Bạn đang ứng tuyển công việc của mình :(',
+      };
+      res.render('error');
+      return;
     }
 
     const apply = await Apply.findOne({ job_id: __id, username: _username })
       .lean()
       .exec();
+
+    if (apply != null) {
+      res.locals = {
+        ...res.locals,
+        title: 'Lỗi',
+        message: 'Bạn đã ứng tuyển công việc này',
+      };
+      res.render('error');
+      return;
+    }
 
     if (apply == null) {
       const newApply = new Apply(req.body);
@@ -84,8 +102,6 @@ class ApplyController {
     const apply = await Apply.findOne({ _id: __id, username: _username })
       .lean()
       .exec();
-
-    console.log(apply);
 
     if (apply == null) {
       res.redirect('/apply/my-applies');
