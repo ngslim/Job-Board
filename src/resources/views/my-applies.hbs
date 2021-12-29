@@ -17,31 +17,14 @@
                 <div class='col-12 col-xl-10 border-end'>
                   <h3>{{this.name}}</h3>
                   <p>{{this.description}}</p>
-                  <div class='row'>
-                    <div class='col-6'>
-                      <h6><b>Danh mục: </b>{{this.category}}</h6>
-                    </div>
-                    <div class='col-6'>
-                      <h6><b>Lương: </b>{{this.salary}} VNĐ</h6>
-                    </div>
-                  </div>
-                  <h6><b>Vị trí: </b>{{this.location}}</h6>
-                  <h6><b>Địa chỉ: </b>{{this.address}}</h6>
-                  <div class='row'>
-                    <div class='col-6'>
-                      <h6><b>Người đăng: </b><a
-                          href='/profile?q={{this.posted_by}}'
-                        >{{this.posted_by}}</a></h6>
-                    </div>
-                    <div class='col-6'>
-                      <h6><b>Ngày gửi: </b>{{this.created}}</h6>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <h6><b>Trang thái:
-                      </b>{{this.status}}</h6>
-                  </div>
-
+                  <h5><b>Danh mục: </b>{{this.category}}</h5>
+                  <h5><b>Lương: </b>{{this.salary}}</h5>
+                  <h5><b>Vị trí: </b>{{this.location}}</h5>
+                  <h5><b>Địa chỉ: </b>{{this.address}}</h5>
+                  <h5><b>Người đăng: </b><a
+                      href='/profile?q={{this.posted_by}}'
+                    >{{this.posted_by}}</a></h5>
+                  <h5><b>Ngày gửi: </b>{{this.created}}</h5>
                 </div>
                 <div class='col-12 col-xl-2 align-self-center'>
                   <div class='d-flex align-items-center justify-content-around'>
