@@ -4,9 +4,13 @@ const Category = require('../models/Category');
 
 class JobController {
   // [GET] /explore
-  index(req, res) {
-    res.locals = { ...res.locals, title: 'Khám phá' };
-    res.render('explore');
+  index(req, res, next) {
+    Job.find({})
+      .lean()
+      .then(jobs => {
+        res.locals = { ...res.locals, title: 'Khám phá', jobs: jobs };
+        res.render('explore');})
+      .catch(next);
   }
 
   // [GET] /explore/job?_id=_id

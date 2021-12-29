@@ -124,46 +124,15 @@
       </div>
       <div class='card'>
         <div class='list-group list-group-flush'>
+          {{#each jobs}}
           <a href='' class='list-group-item'>
-            <h3>Phụ bán gian hàng trái cây tại chợ Thủ Đức</h3>
-            <p>Cửa hàng cần người phụ giúp bán hàng vào các ngày trong tuần (thứ
-              2 tới thứ 6)</p>
-            <h5><b>Lương:&nbsp;</b>12000đ/h</h5>
-            <h5><b>Vị trí:&nbsp;</b>Thủ Đức</h5>
-            <h5><b>Đăng bởi:&nbsp;</b>username1</h5>
+            <h3>{{name}}</h3>
+            <p>{{description}}</p>
+            <h5><b>Lương:&nbsp;</b>{{this.salary}}</h5>
+            <h5><b>Vị trí:&nbsp;</b>{{this.location}}</h5>
+            <h5><b>Đăng bởi:&nbsp;</b>{{this.posted_by}}</h5>
           </a>
-          <a href='' class='list-group-item'>
-            <h3>Phụ bán gian hàng trái cây tại chợ Thủ Đức</h3>
-            <p>Cửa hàng cần người phụ giúp bán hàng vào các ngày trong tuần (thứ
-              2 tới thứ 6)</p>
-            <h5><b>Lương:&nbsp;</b>12000đ/h</h5>
-            <h5><b>Vị trí:&nbsp;</b>Thủ Đức</h5>
-            <h5><b>Đăng bởi:&nbsp;</b>username1</h5>
-          </a>
-          <a href='' class='list-group-item'>
-            <h3>Phụ bán gian hàng trái cây tại chợ Thủ Đức</h3>
-            <p>Cửa hàng cần người phụ giúp bán hàng vào các ngày trong tuần (thứ
-              2 tới thứ 6)</p>
-            <h5><b>Lương:&nbsp;</b>12000đ/h</h5>
-            <h5><b>Vị trí:&nbsp;</b>Thủ Đức</h5>
-            <h5><b>Đăng bởi:&nbsp;</b>username1</h5>
-          </a>
-          <a href='' class='list-group-item'>
-            <h3>Phụ bán gian hàng trái cây tại chợ Thủ Đức</h3>
-            <p>Cửa hàng cần người phụ giúp bán hàng vào các ngày trong tuần (thứ
-              2 tới thứ 6)</p>
-            <h5><b>Lương:&nbsp;</b>12000đ/h</h5>
-            <h5><b>Vị trí:&nbsp;</b>Thủ Đức</h5>
-            <h5><b>Đăng bởi:&nbsp;</b>username1</h5>
-          </a>
-          <a href='' class='list-group-item'>
-            <h3>Phụ bán gian hàng trái cây tại chợ Thủ Đức</h3>
-            <p>Cửa hàng cần người phụ giúp bán hàng vào các ngày trong tuần (thứ
-              2 tới thứ 6)</p>
-            <h5><b>Lương:&nbsp;</b>12000đ/h</h5>
-            <h5><b>Vị trí:&nbsp;</b>Thủ Đức</h5>
-            <h5><b>Đăng bởi:&nbsp;</b>username1</h5>
-          </a>
+          {{/each}}
         </div>
       </div>
     </div>
