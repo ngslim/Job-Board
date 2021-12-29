@@ -118,17 +118,9 @@
                   class='form-select form-select-lg mb-3'
                   aria-label='.form-select-lg example'
                 >
-                  <option value='Thủ Đức' selected>Thủ Đức</option>
-                  <option value='Quận 1'>Quận 1</option>
-                  <option value='Quận 2'>Quận 2</option>
-                  <option value='Quận 3'>Quận 3</option>
-                  <option value='Quận 4'>Quận 4</option>
-                  <option value='Quận 5'>Quận 5</option>
-                  <option value='Quận 6'>Quận 6</option>
-                  <option value='Quận 7'>Quận 7</option>
-                  <option value='Quận 8'>Quận 8</option>
-                  <option value='Quận 9'>Quận 9</option>
-                  <option value='Quận 10'>Quận 10</option>
+                  {{#each locations}}
+                    <option value='{{this.name}}'>{{this.name}}</option>
+                  {{/each}}
                 </select>
               </h3>
             </div>
@@ -143,10 +135,9 @@
                   class='form-select form-select-lg mb-3'
                   aria-label='.form-select-lg example'
                 >
-                  <option value='Phục vụ' selected>Phục vụ</option>
-                  <option value='Viết lách'>Viết lách</option>
-                  <option value='Gia sư'>Gia sư</option>
-                  <option value='Trợ lý bán hàng'>Trợ lý bán hàng</option>
+                  {{#each categories}}
+                    <option value='{{this.name}}'>{{this.name}}</option>
+                  {{/each}}
                 </select>
               </h3>
             </div>
