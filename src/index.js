@@ -4,28 +4,19 @@ const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const app = express();
 const port = 3000;
-const flash = require('connect-flash');
 const session = require('express-session');
+const helpers = require('handlebars-helpers')();
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(flash());
 
 app.use(
   session({
     resave: true,
     saveUninitialized: true,
     secret: 'job-board-session',
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 60 * 60 * 1000 },
   })
 );
-
-app.use(function (req, res, next) {
-  res.locals.success_alert_message = req.flash('success_alert_message');
-  res.locals.error_message = req.flash('error_message');
-  res.locals.error = req.flash('error');
-  next();
-});
 
 //HTTP logger
 app.use(morgan('combined'));
@@ -39,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Template engine
+engine.helpers = helpers;
 app.engine('hbs', engine({ extname: '.hbs', defaultLayout: 'main' }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, './resources/views'));
