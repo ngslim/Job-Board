@@ -28,6 +28,7 @@ class ApplyController {
       if (applyInfo) {
         applyInfo.created = applies[i].created;
         applyInfo.apply_id = applies[i]._id;
+        applyInfo.status = applies[i].status;
         applyInfos.push(applyInfo);
       }
     }
@@ -110,6 +111,75 @@ class ApplyController {
 
     Apply.deleteOne({ _id: __id }).then(() => {
       res.redirect('/apply/my-applies');
+    });
+  }
+
+  // [GET] /apply/apply-list?_id=_id
+  async apply_list(req, res) {
+    if (!req.session.User) {
+      res.redirect('/');
+      return;
+    }
+
+    const __id = req.query._id;
+    const _username = req.session.User.username;
+
+    const job = await Job.findOne({ _id: __id, posted_by: _username })
+      .lean()
+      .exec();
+
+    if (job == null) {
+      res.redirect('/explore/my-jobs');
+      return;
+    }
+
+    const applies = await Apply.find({
+      job_id: __id,
+      job_owner: _username,
+      status: 'Đang duyệt',
+    })
+      .lean()
+      .exec();
+
+    const noApply = applies.length == 0 ? true : false;
+
+    res.locals = {
+      ...res.locals,
+      title: 'Danh sách ứng viên',
+      job: job,
+      applies: applies,
+      noApply: noApply,
+    };
+    res.render('apply-list');
+  }
+
+  async response_apply(req, res) {
+    if (!req.session.User) {
+      res.redirect('/');
+      return;
+    }
+
+    const __id = req.query._id;
+    const _username = req.session.User.username;
+    let value = req.query.value;
+
+    if (value == 'approve') {
+      value = 'Chấp nhận';
+    } else {
+      value = 'Từ chối';
+    }
+
+    const apply = await Apply.findOne({ _id: __id, job_owner: _username })
+      .lean()
+      .exec();
+
+    if (apply == null) {
+      res.redirect('/apply/apply-list?_id=' + apply.job_id);
+      return;
+    }
+
+    Apply.updateOne({ _id: __id }, { status: value }).then(() => {
+      res.redirect('/apply/apply-list?_id=' + apply.job_id);
     });
   }
 }
