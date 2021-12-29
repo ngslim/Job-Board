@@ -7,16 +7,16 @@ class JobController {
   index(req, res, next) {
     Job.find({})
       .lean()
-      .then(jobs => {
+      .then((jobs) => {
         res.locals = { ...res.locals, title: 'Khám phá', jobs: jobs };
-        res.render('explore');})
+        res.render('explore');
+      })
       .catch(next);
   }
 
   // [GET] /explore/job?_id=_id
   async info(req, res) {
     const __id = req.query._id;
-    console.log(__id);
 
     const job = await Job.findOne({
       _id: __id,
@@ -30,7 +30,6 @@ class JobController {
       return;
     }
 
-    console.log(job);
     res.locals = { ...res.locals, title: job.name, job: job };
 
     res.render('job');
