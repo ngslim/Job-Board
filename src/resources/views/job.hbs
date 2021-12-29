@@ -10,14 +10,16 @@
   <div class='card w-100'>
     <div class='card-body'>
       <div class='col-12'>
-        <form method='post' action='/explore/create-job'>
+        <form method='post' action='/explore/apply-job?_id={{job._id}}'>
           <div class='row'>
             <div class='col-12 col-md-3 border-end'>
               <div class='d-flex justify-content-center'>
-                <h4><b>Đăng bởi: </b>123456</h4>
+                <h4><b>Đăng bởi: </b>{{job.posted_by}}</h4>
               </div>
               <div class='d-flex justify-content-center'>
-                <h5><b>Vào lúc: </b>123456</h5>
+                <div class='text-center'>
+                  <h5><b>Vào lúc: </b>{{job.created}}</h5>
+                </div>
               </div>
               <div class='d-flex justify-content-center mb-5'>
                 <button class='apply-button' type='submit'>ỨNG TUYỂN</button>
@@ -26,29 +28,29 @@
             <div class='col-12 col-md-9'>
               <div class='row mb-4'>
                 <div class='d-flex justify-content-center'>
-                  <h1><b>Phục vụ quán nước</b></h1>
+                  <h1><b>{{job.name}}</b></h1>
                 </div>
               </div>
               <div class='row mb-5'>
                 <div class='d-flex justify-content-center'>
-                  <h5>Phục vụ</h5>
+                  <h5>{{job.category}}</h5>
                 </div>
               </div>
               <div class='row mb-5'>
                 <div class='col-12 col-md-9 border-end'>
-                  <h4>Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô
-                    tả Mô tả Mô tả
+                  <h4>{{job.description}}
                   </h4>
                 </div>
                 <div class='col-12 col-md-3'>
-                  <h4><b>Vị trí:</b></h4>
-                  <h4><b>Lương:</b></h4>
+                  <h4><b>Vị trí: </b>{{job.location}}</h4>
+                  <h4><b>Lương: </b>{{job.salary}}</h4>
                 </div>
               </div>
               <div class='row mb-5'>
                 <div class='col-12'>
                   <h4>
                     <b>Địa chỉ: </b>
+                    {{job.address}}
                   </h4>
                 </div>
               </div>

@@ -296,7 +296,6 @@
 //job button
 .card .job-button {
   margin-top: 25px;
-  margin-left: 12px;
   width: 500px;
   height: 75px;
   border: none;
@@ -310,6 +309,28 @@
 }
 
 .card .job-button:hover {
+  transform: scale(1.03);
+  opacity: 95%;
+}
+
+.card .apply-button {
+  margin-top: 25px;
+  width: 50%;
+  min-width: 250px;
+  height: 75px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: white;
+  background-color: #20bf55;
+  background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+  font-size: 32px;
+  font-weight: bold;
+
+  transition: 0.3s;
+}
+
+.card .apply-button:hover {
   transform: scale(1.03);
   opacity: 95%;
 }

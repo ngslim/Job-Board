@@ -10,9 +10,10 @@ class JobController {
     res.render('explore');
   }
 
-  // [GET] /explore/job?q=id
+  // [GET] /explore/job?_id=_id
   async info(req, res) {
-    const __id = req.query.q;
+    const __id = req.query._id;
+    console.log(__id);
 
     const job = await Job.findOne({
       _id: __id,
@@ -26,6 +27,7 @@ class JobController {
       return;
     }
 
+    console.log(job);
     res.locals = { ...res.locals, title: job.name, job: job };
 
     res.render('job');
