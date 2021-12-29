@@ -3,59 +3,57 @@
     class='col-12 text-light text-center justify-content-center mb-5 mt-5'
     style='font-size: 48px; font-weight:500;'
   >
-    Thông tin công việc
+    Danh sách ứng tuyển đã gửi
   </div>
 </div>
-<div class='container-fluid d-flex justify-content-center mt-5 mb-5'>
-  <div class='card w-100'>
-    <div class='card-body'>
-      <div class='col-12'>
-        <form method='post' action='/explore/create-job'>
-          <div class='row'>
-            <div class='col-12 col-md-3 border-end'>
-              <div class='d-flex justify-content-center'>
-                <h4><b>Đăng bởi: </b>123456</h4>
-              </div>
-              <div class='d-flex justify-content-center'>
-                <h5><b>Vào lúc: </b>123456</h5>
-              </div>
-              <div class='d-flex justify-content-center mb-5'>
-                <button class='apply-button' type='submit'>ỨNG TUYỂN</button>
-              </div>
-            </div>
-            <div class='col-12 col-md-9'>
-              <div class='row mb-4'>
-                <div class='d-flex justify-content-center'>
-                  <h1><b>Phục vụ quán nước</b></h1>
+<div class='container-fluid mt-5 mb-5'>
+  <div class='row'>
+    <div class='col-12 mb-3'>
+      <div class='card'>
+        {{#each applyInfos}}
+          <div class='list-group list-group-flush'>
+            <div class='list-group-item'>
+              <div class='row'>
+                <div class='col-12 col-xl-10 border-end'>
+                  <h3>{{this.name}}</h3>
+                  <p>{{this.description}}</p>
+                  <h5><b>Danh mục:&nbsp;</b>{{this.category}}</h5>
+                  <h5><b>Lương:&nbsp;</b>{{this.salary}}</h5>
+                  <h5><b>Vị trí:&nbsp;</b>{{this.location}}</h5>
+                  <h5><b>Địa chỉ:&nbsp;</b>{{this.address}}</h5>
+                  <h5><b>Người đăng:&nbsp;</b>{{this.posted_by}}</h5>
                 </div>
-              </div>
-              <div class='row mb-5'>
-                <div class='d-flex justify-content-center'>
-                  <h5>Phục vụ</h5>
-                </div>
-              </div>
-              <div class='row mb-5'>
-                <div class='col-12 col-md-9 border-end'>
-                  <h4>Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô tả Mô
-                    tả Mô tả Mô tả
-                  </h4>
-                </div>
-                <div class='col-12 col-md-3'>
-                  <h4><b>Vị trí:</b></h4>
-                  <h4><b>Lương:</b></h4>
-                </div>
-              </div>
-              <div class='row mb-5'>
-                <div class='col-12'>
-                  <h4>
-                    <b>Địa chỉ: </b>
-                  </h4>
+                <div class='col-12 col-xl-2 align-self-center'>
+                  <div class='d-flex align-items-center justify-content-around'>
+                    <a href='/apply/delete-apply?_id={{this.apply_id}}'><h3
+                        class='text-danger'
+                      ><i class='bi bi-trash'></i></h3></a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+        {{/each}}
       </div>
     </div>
   </div>
+</div>
+<div class='d-flex justify-content-center'>
+  <nav aria-label='Page navigation example'>
+    <ul class='pagination'>
+      <li class='page-item'>
+        <a class='page-link' href='#' aria-label='Previous'>
+          <span aria-hidden='true'>&laquo;</span>
+        </a>
+      </li>
+      <li class='page-item'><a class='page-link' href='#'>1</a></li>
+      <li class='page-item'><a class='page-link' href='#'>2</a></li>
+      <li class='page-item'><a class='page-link' href='#'>3</a></li>
+      <li class='page-item'>
+        <a class='page-link' href='#' aria-label='Next'>
+          <span aria-hidden='true'>&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

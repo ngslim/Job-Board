@@ -1,7 +1,6 @@
 const Job = require('../models/Job');
 const Location = require('../models/Location');
 const Category = require('../models/Category');
-const { redirect } = require('express/lib/response');
 
 class JobController {
   // [GET] /explore
@@ -23,7 +22,7 @@ class JobController {
 
     if (job === null) {
       res.locals = { ...res.locals, title: 'Lỗi' };
-      res.render('error');
+      res.render('404');
       return;
     }
 
@@ -125,8 +124,6 @@ class JobController {
       .lean()
       .exec();
 
-    console.log(job);
-
     if (job == null) {
       res.redirect('/');
       return;
@@ -147,6 +144,11 @@ class JobController {
     const _username = req.session.User.username;
 
     const jobs = await Job.find({ posted_by: _username }).lean().exec();
+
+    if (jobs.length == 0) {
+      res.redirect('/no-job');
+      return;
+    }
 
     res.locals = { ...res.locals, title: 'Công việc của tôi', jobs: jobs };
     res.render('my-jobs');
