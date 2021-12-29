@@ -230,6 +230,9 @@
   -webkit-text-fill-color: transparent;
   font-size: 300px; }
 
+.gradient-text:hover {
+  transform: scale(1.03); }
+
 .card .job-button {
   margin-top: 25px;
   width: 500px;

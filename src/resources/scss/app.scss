@@ -293,6 +293,10 @@
   font-size: 300px;
 }
 
+.gradient-text:hover {
+  transform: scale(1.03);
+}
+
 //job button
 .card .job-button {
   margin-top: 25px;

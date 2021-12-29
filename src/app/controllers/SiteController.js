@@ -26,6 +26,12 @@ class SiteController {
     res.render('no-apply');
   }
 
+  // [GET] /error-apply
+  error(req, res) {
+    res.locals = { ...res.locals, title: 'Lỗi' };
+    res.render('error');
+  }
+
   // [GET] /test
   test(req, res) {
     res.locals = { ...res.locals, title: 'Test' };
