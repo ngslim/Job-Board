@@ -124,6 +124,19 @@
         </div>
       </div>
       <div class='card'>
+        {{#if noMatch}}
+          <div class='list-group list-group-flush'>
+            <div class='list-group-item'>
+              <div class='row'>
+                <div class='d-flex justify-content-center'>
+                  <h5>
+                    <em>Không tìm thấy công việc phù hợp.</em>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
         <div class='list-group list-group-flush'>
           {{#each jobs}}
             <a href='/explore/job?_id={{this._id}}' class='list-group-item'>

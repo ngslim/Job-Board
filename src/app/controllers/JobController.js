@@ -156,6 +156,30 @@ class JobController {
     res.locals = { ...res.locals, title: 'Công việc của tôi', jobs: jobs };
     res.render('my-jobs');
   }
+
+  // [GET] /explore/search?name=
+  async search_jobs(req, res, next) {
+    const _name = req.query.name;
+    const jobs = await Job.find({
+      name: { $regex: _name, $options: 'i' },
+    })
+      .lean()
+      .exec();
+
+    let noMatch = false;
+
+    if (jobs.length == 0) {
+      noMatch = true;
+    }
+
+    res.locals = {
+      ...res.locals,
+      title: 'Khám phá',
+      jobs: jobs,
+      noMatch: noMatch,
+    };
+    res.render('explore');
+  }
 }
 
 module.exports = new JobController();
