@@ -19,9 +19,15 @@
             <h5>Danh mục</h5>
             <div class='list-group list-group-flush'>
               {{#each categories}}
-              <a href='/explore/search/{{this.name}}' class='list-group-item'>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="categories" id="category-{{this.name}}" value="{{this.name}}">
+                <label class="form-check-label" for="category-{{this.name}}">
+                  {{this.name}}
+                </label>
+              </div>
+              {{!-- <a href='/explore/search?category={{this.name}}' class='list-group-item'>
                 {{this.name}}
-              </a>
+              </a> --}}
               {{/each}}
             </div>
           </li>
@@ -133,3 +139,20 @@
     </nav>
   </div>
 </div>
+
+{{!-- GET hidden form --}}
+<form method='GET' name='filter-categories'></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var category;
+    var filterCategories = document.forms['filter-categories'];
+
+    $('input[name="categories"]').on('change', function(e) {
+      category = e.target.value;
+      filterCategories.action = `/explore/search/${category}`;
+      filterCategories.submit();
+    });
+
+  });
+</script>

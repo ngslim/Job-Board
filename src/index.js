@@ -31,7 +31,11 @@ app.use(express.json());
 
 //Template engine
 engine.helpers = helpers;
-app.engine('hbs', engine({ extname: '.hbs', defaultLayout: 'main' }));
+app.engine('hbs', engine({ 
+  extname: '.hbs', 
+  defaultLayout: 'main', 
+}));
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, './resources/views'));
 

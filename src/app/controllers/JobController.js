@@ -160,7 +160,7 @@ class JobController {
   // [GET] /explore/search?name=
   async search_jobs(req, res, next) {
     const _name = req.query.name;
-    console.log(_name);
+
     const jobs = await Job.find({
       name: { $regex: _name, $options: 'i' },
     })
@@ -185,7 +185,9 @@ class JobController {
   // [GET] /explore/search/?filer
   async filter_jobs(req, res, next) {
     const _category = req.params.category;
-    console.log(_category);
+    const categories = await Category.find({}).lean().exec();
+    const locations = await Location.find({}).lean().exec();
+
     const jobs = await Job.find({
       category: { $regex: _category, $options: 'i' },
     })
@@ -202,7 +204,10 @@ class JobController {
       ...res.locals,
       title: 'Khám phá',
       jobs: jobs,
-      noMatch: noMatch
+      categories: categories,
+      locations: locations,
+      checked: _category,
+      noMatch: noMatch,
     }
     res.render('explore');
   }
