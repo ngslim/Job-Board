@@ -4,24 +4,14 @@ const Category = require('../models/Category');
 
 class JobController {
   // [GET] /explore
-  index(req, res, next) {
-    Category.find({})
-      .lean()
-      .then((categories) => {
-        res.locals = { ...res.locals, categories: categories };
-      })  
-    Location.find({})
-      .lean()
-      .then(locations => {
-        res.locals = { ...res.locals, locations: locations };
-      })
-    Job.find({})
-      .lean()
-      .then((jobs) => {
-        res.locals = { ...res.locals, jobs: jobs, title: 'Khám phá' };
-        res.render('explore');
-      })
-      .catch(next);
+  async index(req, res, next) {
+    const jobs = await Job.find({}).lean().exec();
+    const categories = await Category.find({}).lean().exec();
+    const locations = await Location.find({}).lean().exec();
+    
+    res.locals = { ...res.locals, title: 'Khám phá', jobs, categories, locations };
+
+    res.render('explore');
   }
 
   // [GET] /explore/job?_id=_id
