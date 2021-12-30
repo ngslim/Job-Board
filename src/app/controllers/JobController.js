@@ -5,10 +5,20 @@ const Category = require('../models/Category');
 class JobController {
   // [GET] /explore
   index(req, res, next) {
+    Category.find({})
+      .lean()
+      .then((categories) => {
+        res.locals = { ...res.locals, categories: categories };
+      })  
+    Location.find({})
+      .lean()
+      .then(locations => {
+        res.locals = { ...res.locals, locations: locations };
+      })
     Job.find({})
       .lean()
       .then((jobs) => {
-        res.locals = { ...res.locals, title: 'Khám phá', jobs: jobs };
+        res.locals = { ...res.locals, jobs: jobs, title: 'Khám phá' };
         res.render('explore');
       })
       .catch(next);
@@ -160,6 +170,7 @@ class JobController {
   // [GET] /explore/search?name=
   async search_jobs(req, res, next) {
     const _name = req.query.name;
+    console.log(_name);
     const jobs = await Job.find({
       name: { $regex: _name, $options: 'i' },
     })
@@ -178,6 +189,31 @@ class JobController {
       jobs: jobs,
       noMatch: noMatch,
     };
+    res.render('explore');
+  }
+
+  // [GET] /explore/search/?filer
+  async filter_jobs(req, res, next) {
+    const _category = req.params.category;
+    console.log(_category);
+    const jobs = await Job.find({
+      category: { $regex: _category, $options: 'i' },
+    })
+      .lean()
+      .exec();
+
+    let noMatch = false;
+
+    if (jobs.length == 0) {
+      noMatch = true;
+    }
+
+    res.locals = {
+      ...res.locals,
+      title: 'Khám phá',
+      jobs: jobs,
+      noMatch: noMatch
+    }
     res.render('explore');
   }
 }

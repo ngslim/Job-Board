@@ -18,22 +18,16 @@
           <li class='list-group-item'>
             <h5>Danh mục</h5>
             <div class='list-group list-group-flush'>
-              <a href='' class='list-group-item'>
-                Phục vụ
+              {{#each categories}}
+              <a href='/explore/search/{{this.name}}' class='list-group-item'>
+                {{this.name}}
               </a>
-              <a href='' class='list-group-item'>
-                Viết lách
-              </a>
-              <a href='' class='list-group-item'>
-                Gia sư
-              </a>
-              <a href='' class='list-group-item'>
-                Trợ lý bán hàng
-              </a>
+              {{/each}}
             </div>
           </li>
           <li class='list-group-item'>
             <h5>Vị trí</h5>
+            {{#each locations}}
             <div class='form-check'>
               <input
                 class='form-check-input'
@@ -42,42 +36,10 @@
                 id='flex-1'
               />
               <label class='form-check-label' for='flex-1'>
-                Thủ Đức
+                {{this.name}}
               </label>
             </div>
-            <div class='form-check'>
-              <input
-                class='form-check-input'
-                type='checkbox'
-                value=''
-                id='flex-2'
-              />
-              <label class='form-check-label' for='flex-2'>
-                Bình Dương
-              </label>
-            </div>
-            <div class='form-check'>
-              <input
-                class='form-check-input'
-                type='checkbox'
-                value=''
-                id='flex-3'
-              />
-              <label class='form-check-label' for='flex-3'>
-                Quận 1
-              </label>
-            </div>
-            <div class='form-check'>
-              <input
-                class='form-check-input'
-                type='checkbox'
-                value=''
-                id='flex-4'
-              />
-              <label class='form-check-label' for='flex-4'>
-                Quận Bình Thạnh
-              </label>
-            </div>
+            {{/each}}
           </li>
           <li class='list-group-item'>
             <h5>Lương</h5>
