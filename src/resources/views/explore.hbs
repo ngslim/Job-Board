@@ -77,7 +77,7 @@
           </li>
           <li class='list-group-item'>
             <div>
-              <button type="button" class="btn btn-primary btn-sm" id='submit-filter'>Tìm kiếm</button>
+              <button type="button" class="btn btn-primary btn-sm" id='submit-filter' disabled='disabled'>Tìm kiếm</button>
             </div>
           </li>
         </ul>
@@ -157,9 +157,9 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    var category;
+    var category = '';
     var location = [];
-    var salary;
+    var salary = '';
     var filter = document.forms['filter'];
     var submitButton = document.getElementById('submit-filter');
     //var filterCategories = $('form[name="filter-categories"]');
@@ -177,6 +177,7 @@
 
     $('input[name="categories"]').on('change', function(e) {
       category = e.target.value;
+      checkValidation(category, location, salary);
     });
 
     $('input[name="locations"]').on('change', function() {
@@ -185,10 +186,13 @@
       $.each($("input[name='locations']:checked"), function(){
         location.push($(this).val());
       });
+
+      checkValidation(category, location, salary);
     });
 
     $('input[name="salary"]').on('change', function(e) {
       salary = e.target.value;
+      checkValidation(category, location, salary);
     });
 
     submitButton.onclick = function() {
@@ -197,6 +201,15 @@
       $('input[name="salaryInput"]').val(salary);
       filter.submit();
       console.log('submit');
+    }
+
+    function checkValidation(category, location, salary) {
+      if (category !== '' && salary !== '' && location.length !== 0) {
+        submitButton.removeAttribute('disabled');
+      }
+      else {
+        submitButton.setAttribute('disabled', 'true');
+      }
     }
   });
 </script>

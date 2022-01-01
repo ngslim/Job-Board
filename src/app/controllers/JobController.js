@@ -12,8 +12,9 @@ class JobController {
     const locations = await Location.find({}).lean().exec();
     
     res.locals = { ...res.locals, title: 'Khám phá', jobs, categories, locations };
-
+    //res.json(jobs);
     res.render('explore');
+
   }
 
   // [GET] /explore/job?_id=_id
