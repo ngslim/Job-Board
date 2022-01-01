@@ -1,6 +1,8 @@
 const Job = require('../models/Job');
 const Location = require('../models/Location');
 const Category = require('../models/Category');
+const { query } = require('express');
+const { forEach } = require('handlebars-helpers/lib/array');
 
 class JobController {
   // [GET] /explore
@@ -182,19 +184,45 @@ class JobController {
     res.render('explore');
   }
 
-  // [GET] /explore/search/?filer
+  // [GET] /explore/search/filter
   async filter_jobs(req, res, next) {
-    const _category = req.params.category;
+    var _category = req.query.categoryInput;
+    var _location = req.query.locationInput;
+    var _salary = req.query.salaryInput;
+    var locationArray = _location.split(',');
+    var jobs;
+    let noMatch = false;
+
     const categories = await Category.find({}).lean().exec();
     const locations = await Location.find({}).lean().exec();
-
-    const jobs = await Job.find({
-      category: { $regex: _category, $options: 'i' },
-    })
-      .lean()
-      .exec();
-
-    let noMatch = false;
+    
+    //_salary: sring
+    if(_salary == '1') {
+      jobs = await Job.find({
+        category: { $regex: _category, $options: 'i' },
+        location: { $in: locationArray },
+        salary: { $gte: 500000 },
+      })
+        .lean()
+        .exec();
+    }
+    else if(_salary == '0') {
+      jobs = await Job.find({
+        category: { $regex: _category, $options: 'i' },
+        location: { $in: locationArray },
+        salary: { $lte: 500000 },
+      })
+        .lean()
+        .exec();
+    }
+    else {
+      jobs = await Job.find({
+        category: { $regex: _category, $options: 'i' },
+        location: { $in: locationArray },
+      })
+        .lean()
+        .exec();
+    }
 
     if (jobs.length == 0) {
       noMatch = true;
@@ -206,7 +234,6 @@ class JobController {
       jobs: jobs,
       categories: categories,
       locations: locations,
-      checked: _category,
       noMatch: noMatch,
     }
     res.render('explore');

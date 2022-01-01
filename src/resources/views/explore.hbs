@@ -38,10 +38,11 @@
               <input
                 class='form-check-input'
                 type='checkbox'
-                value=''
-                id='flex-1'
+                value='{{this.name}}'
+                id='flex-{{this.name}}'
+                name='locations'
               />
-              <label class='form-check-label' for='flex-1'>
+              <label class='form-check-label' for='flex-{{this.name}}'>
                 {{this.name}}
               </label>
             </div>
@@ -53,8 +54,9 @@
               <input
                 class='form-check-input'
                 type='radio'
-                name='flexRadioDefault'
+                name='salary'
                 id='flexRadioDefault1'
+                value='0'
               />
               <label class='form-check-label' for='flexRadioDefault1'>
                 &lt500000đ
@@ -64,12 +66,18 @@
               <input
                 class='form-check-input'
                 type='radio'
-                name='flexRadioDefault'
+                name='salary'
                 id='flexRadioDefault2'
+                value='1'
               />
               <label class='form-check-label' for='flexRadioDefault2'>
                 >500000đ
               </label>
+            </div>
+          </li>
+          <li class='list-group-item'>
+            <div>
+              <button type="button" class="btn btn-primary btn-sm" id='submit-filter'>Tìm kiếm</button>
             </div>
           </li>
         </ul>
@@ -141,18 +149,54 @@
 </div>
 
 {{!-- GET hidden form --}}
-<form method='GET' name='filter-categories'></form>
+<form method='GET' action='/explore/search/filter' name='filter'>
+  <input type='hidden' name='categoryInput' value=''/>
+  <input type='hidden' name='locationInput' value=''/>
+  <input type='hidden' name='salaryInput' value=''/>
+</form>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     var category;
-    var filterCategories = document.forms['filter-categories'];
+    var location = [];
+    var salary;
+    var filter = document.forms['filter'];
+    var submitButton = document.getElementById('submit-filter');
+    //var filterCategories = $('form[name="filter-categories"]');
+    function show(category, location, salary){
+      $.ajax({
+        url: '/explore/search',
+        contentType: 'application/json',
+        method: 'POST',
+        data: JSON.stringify({category: category, location: location, salary: salary}),
+        success: function(result) {
+          console.log(result);
+        }
+      });
+    }
 
     $('input[name="categories"]').on('change', function(e) {
       category = e.target.value;
-      filterCategories.action = `/explore/search/${category}`;
-      filterCategories.submit();
     });
 
+    $('input[name="locations"]').on('change', function() {
+      location.length = 0;
+
+      $.each($("input[name='locations']:checked"), function(){
+        location.push($(this).val());
+      });
+    });
+
+    $('input[name="salary"]').on('change', function(e) {
+      salary = e.target.value;
+    });
+
+    submitButton.onclick = function() {
+      $('input[name="categoryInput"]').val(category);
+      $('input[name="locationInput"]').val(location);
+      $('input[name="salaryInput"]').val(salary);
+      filter.submit();
+      console.log('submit');
+    }
   });
 </script>
