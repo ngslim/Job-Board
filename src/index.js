@@ -33,7 +33,7 @@ app.use(express.json());
 engine.helpers = helpers;
 app.engine('hbs', engine({ 
   extname: '.hbs', 
-  defaultLayout: 'main', 
+  defaultLayout: 'main',
 }));
 
 app.set('view engine', 'hbs');

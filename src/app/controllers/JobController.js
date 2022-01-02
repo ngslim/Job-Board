@@ -7,11 +7,26 @@ const { forEach } = require('handlebars-helpers/lib/array');
 class JobController {
   // [GET] /explore
   async index(req, res, next) {
-    const jobs = await Job.find({}).lean().exec();
+    const PAGE_SIZE = 5;
+    var total = await Job.countDocuments({});
+    var totalPage = [];
+    for(var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
+      totalPage.push({page: i + 1});
+    }
+    var page = req.query.page;
+    if(page) {
+      page = parseInt(page);
+    }
+    else {
+      page = 1;
+    }
+    var skip = (page - 1) * PAGE_SIZE;
+
+    const jobs = await Job.find({}).skip(skip).limit(PAGE_SIZE).lean().exec();
     const categories = await Category.find({}).lean().exec();
     const locations = await Location.find({}).lean().exec();
-    
-    res.locals = { ...res.locals, title: 'Khám phá', jobs, categories, locations };
+
+    res.locals = { ...res.locals, title: 'Khám phá', jobs, categories, locations, totalPage, page };
     //res.json(jobs);
     res.render('explore');
 
@@ -176,10 +191,15 @@ class JobController {
       noMatch = true;
     }
 
+    const categories = await Category.find({}).lean().exec();
+    const locations = await Location.find({}).lean().exec();
+
     res.locals = {
       ...res.locals,
       title: 'Khám phá',
       jobs: jobs,
+      categories: categories,
+      locations: locations,
       noMatch: noMatch,
     };
     res.render('explore');
@@ -193,9 +213,19 @@ class JobController {
     var locationArray = _location.split(',');
     var jobs;
     let noMatch = false;
+    const PAGE_SIZE = 5;
 
-    const categories = await Category.find({}).lean().exec();
-    const locations = await Location.find({}).lean().exec();
+    var total;
+    var totalPage = [];
+
+    var page = req.query.page;
+    if(page) {
+      page = parseInt(page);
+    }
+    else {
+      page = 1;
+    }
+    var skip = (page - 1) * PAGE_SIZE;
     
     //_salary: sring
     if(_salary == '1') {
@@ -204,6 +234,8 @@ class JobController {
         location: { $in: locationArray },
         salary: { $gte: 500000 },
       })
+        .skip(skip)
+        .limit(PAGE_SIZE)
         .lean()
         .exec();
     }
@@ -213,6 +245,8 @@ class JobController {
         location: { $in: locationArray },
         salary: { $lte: 500000 },
       })
+        .skip(skip)
+        .limit(PAGE_SIZE)
         .lean()
         .exec();
     }
@@ -221,6 +255,8 @@ class JobController {
         category: { $regex: _category, $options: 'i' },
         location: { $in: locationArray },
       })
+        .skip(skip)
+        .limit(PAGE_SIZE)
         .lean()
         .exec();
     }
@@ -228,6 +264,15 @@ class JobController {
     if (jobs.length == 0) {
       noMatch = true;
     }
+    else {
+      total = jobs.length;
+      for(var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
+        totalPage.push({page: i + 1});
+      }
+    }
+
+    const categories = await Category.find({}).lean().exec();
+    const locations = await Location.find({}).lean().exec();
 
     res.locals = {
       ...res.locals,
@@ -235,9 +280,14 @@ class JobController {
       jobs: jobs,
       categories: categories,
       locations: locations,
+      totalPage,
+      page,
       noMatch: noMatch,
+      _category,
+      _location,
+      _salary,
     }
-    res.render('explore');
+    res.render('filter');
   }
 }
 

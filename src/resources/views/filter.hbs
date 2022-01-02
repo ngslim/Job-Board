@@ -131,7 +131,7 @@
     <nav aria-label='Page navigation example'>
       <ul class='pagination'>
         {{#each totalPage}}
-        <li class='page-item page-number'><a class='page-link' href='?page={{this.page}}'>{{this.page}}</a></li>
+        <li class='page-item'><button class='page-link page-number' value='{{this.page}}'>{{this.page}}</button></li>
         {{/each}}
       </ul>
     </nav>
@@ -140,9 +140,10 @@
 
 {{!-- GET hidden form --}}
 <form method='GET' action='/explore/search/filter' name='filter'>
-  <input type='hidden' name='categoryInput' value=''/>
-  <input type='hidden' name='locationInput' value=''/>
-  <input type='hidden' name='salaryInput' value=''/>
+  <input type='hidden' name='categoryInput' value='{{_category}}'/>
+  <input type='hidden' name='locationInput' value='{{_location}}'/>
+  <input type='hidden' name='salaryInput' value='{{_salary}}'/>
+  <input type='hidden' name='page' value=''/>
 </form>
 
 <script>
@@ -151,6 +152,7 @@
     var location = [];
     var salary = '';
     var filter = document.forms['filter'];
+    var filterPage = document.forms['filter-page'];
     var submitButton = document.getElementById('submit-filter');
 
     $('input[name="categories"]').on('change', function(e) {
@@ -172,6 +174,12 @@
       salary = e.target.value;
       checkValidation(category, location, salary);
     });
+
+    $('.page-number').on('click', function() {
+      var _page = $(this).val();
+      $('input[name="page"]').val(_page);
+      filter.submit();
+    })
 
     submitButton.onclick = function() {
       $('input[name="categoryInput"]').val(category);
