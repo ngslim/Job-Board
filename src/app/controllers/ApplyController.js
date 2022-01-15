@@ -141,7 +141,16 @@ class ApplyController {
       .lean()
       .exec();
 
+    const applied = await Apply.find({
+      job_id: __id,
+      job_owner: _username,
+      status: 'Chấp nhận',
+    })
+      .lean()
+      .exec();
+
     const noApply = applies.length == 0 ? true : false;
+    const noApplied = applied.length == 0 ? true : false;
 
     res.locals = {
       ...res.locals,
@@ -149,6 +158,8 @@ class ApplyController {
       job: job,
       applies: applies,
       noApply: noApply,
+      applied: applied,
+      noApplied: noApplied,
     };
     res.render('apply-list');
   }

@@ -40,6 +40,60 @@
             </div>
           </div>
         </div>
+        <div class='list-group list-group-flush'>
+          <div class='list-group-item'>
+            <div class='row text-main'>
+              <div class='d-flex justify-content-center'>
+                <h5>
+                  <b>Đã chấp thuận</b>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{#if noApplied}}
+          <div class='list-group list-group-flush'>
+            <div class='list-group-item'>
+              <div class='row'>
+                <div class='d-flex justify-content-center'>
+                  <h5>
+                    <em>Chưa có ứng viên nào được chấp thuận</em>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+        {{#each applied}}
+          <div class='list-group list-group-flush'>
+            <div class='list-group-item'>
+              <div class='row'>
+                <div class='col-12 col-xl-10 border-end'>
+                  <div class='row'>
+                    <div class='col-4 border-end'>
+                      <a href='/profile?q={{this.username}}'><h5
+                        >{{this.username}}</h5></a>
+                    </div>
+                    <div class='col-8'>
+                      <h5><b>Ứng tuyển vào: </b>{{this.created}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+        <div class='list-group list-group-flush'>
+          <div class='list-group-item'>
+            <div class='row text-main'>
+              <div class='d-flex justify-content-center'>
+                <h5>
+                  <b>Ứng tuyển mới</b>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
         {{#if noApply}}
           <div class='list-group list-group-flush'>
             <div class='list-group-item'>
