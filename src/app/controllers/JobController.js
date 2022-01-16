@@ -211,7 +211,7 @@ class JobController {
     res.render('explore');
   }
 
-  // [GET] /explore/search/filter
+  // [GET] /explore/filter
   async filter_jobs(req, res, next) {
     var _category = req.query.categoryInput;
     var _location = req.query.locationInput;
