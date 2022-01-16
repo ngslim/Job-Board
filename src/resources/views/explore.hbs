@@ -76,8 +76,8 @@
             </div>
           </li>
           <li class='list-group-item'>
-            <div>
-              <button type="button" class="btn btn-primary btn-sm" id='submit-filter' disabled='disabled'>Tìm kiếm</button>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary btn-sm" id='submit-filter'>Tìm kiếm</button>
             </div>
           </li>
         </ul>
@@ -155,7 +155,7 @@
 
     $('input[name="categories"]').on('change', function(e) {
       category = e.target.value;
-      checkValidation(category, location, salary);
+      //checkValidation(category, location, salary);
     });
 
     $('input[name="locations"]').on('change', function() {
@@ -165,12 +165,12 @@
         location.push($(this).val());
       });
 
-      checkValidation(category, location, salary);
+      //checkValidation(category, location, salary);
     });
 
     $('input[name="salary"]').on('change', function(e) {
       salary = e.target.value;
-      checkValidation(category, location, salary);
+      //checkValidation(category, location, salary);
     });
 
     submitButton.onclick = function() {

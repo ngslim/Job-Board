@@ -250,7 +250,15 @@ class JobController {
         .lean()
         .exec();
     }
-    else {
+    else if (locationArray[0] == '') {
+      jobs = await Job.find({
+        category: { $regex: _category, $options: 'i' },
+      })
+        .skip(skip)
+        .limit(PAGE_SIZE)
+        .lean()
+        .exec();
+    } else{
       jobs = await Job.find({
         category: { $regex: _category, $options: 'i' },
         location: { $in: locationArray },
