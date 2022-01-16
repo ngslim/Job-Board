@@ -10,14 +10,13 @@ class JobController {
     const PAGE_SIZE = 5;
     var total = await Job.countDocuments({});
     var totalPage = [];
-    for(var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
-      totalPage.push({page: i + 1});
+    for (var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
+      totalPage.push({ page: i + 1 });
     }
     var page = req.query.page;
-    if(page) {
+    if (page) {
       page = parseInt(page);
-    }
-    else {
+    } else {
       page = 1;
     }
     var skip = (page - 1) * PAGE_SIZE;
@@ -26,10 +25,17 @@ class JobController {
     const categories = await Category.find({}).lean().exec();
     const locations = await Location.find({}).lean().exec();
 
-    res.locals = { ...res.locals, title: 'Khám phá', jobs, categories, locations, totalPage, page };
+    res.locals = {
+      ...res.locals,
+      title: 'Khám phá',
+      jobs,
+      categories,
+      locations,
+      totalPage,
+      page,
+    };
     //res.json(jobs);
     res.render('explore');
-
   }
 
   // [GET] /explore/job?_id=_id
@@ -215,67 +221,86 @@ class JobController {
     let noMatch = false;
     const PAGE_SIZE = 5;
 
+    console.log(_salary);
+
     var total;
     var totalPage = [];
 
     var page = req.query.page;
-    if(page) {
+    if (page) {
       page = parseInt(page);
-    }
-    else {
+    } else {
       page = 1;
     }
     var skip = (page - 1) * PAGE_SIZE;
-    
-    //_salary: sring
-    if(_salary == '1') {
-      jobs = await Job.find({
-        category: { $regex: _category, $options: 'i' },
-        location: { $in: locationArray },
-        salary: { $gte: 500000 },
-      })
-        .skip(skip)
-        .limit(PAGE_SIZE)
-        .lean()
-        .exec();
-    }
-    else if(_salary == '0') {
-      jobs = await Job.find({
-        category: { $regex: _category, $options: 'i' },
-        location: { $in: locationArray },
-        salary: { $lte: 500000 },
-      })
-        .skip(skip)
-        .limit(PAGE_SIZE)
-        .lean()
-        .exec();
-    }
-    else if (locationArray[0] == '') {
-      jobs = await Job.find({
-        category: { $regex: _category, $options: 'i' },
-      })
-        .skip(skip)
-        .limit(PAGE_SIZE)
-        .lean()
-        .exec();
-    } else{
-      jobs = await Job.find({
-        category: { $regex: _category, $options: 'i' },
-        location: { $in: locationArray },
-      })
-        .skip(skip)
-        .limit(PAGE_SIZE)
-        .lean()
-        .exec();
+
+    if (locationArray[0] == '') {
+      if (_salary == '1') {
+        jobs = await Job.find({
+          category: { $regex: _category, $options: 'i' },
+          salary: { $gte: 500000 },
+        })
+          .skip(skip)
+          .limit(PAGE_SIZE)
+          .lean()
+          .exec();
+      } else if (_salary == '0') {
+        jobs = await Job.find({
+          category: { $regex: _category, $options: 'i' },
+          salary: { $lte: 500000 },
+        })
+          .skip(skip)
+          .limit(PAGE_SIZE)
+          .lean()
+          .exec();
+      } else {
+        jobs = await Job.find({
+          category: { $regex: _category, $options: 'i' },
+        })
+          .skip(skip)
+          .limit(PAGE_SIZE)
+          .lean()
+          .exec();
+      }
+    } else {
+      if (_salary == '1') {
+        jobs = await Job.find({
+          category: { $regex: _category, $options: 'i' },
+          location: { $in: locationArray },
+          salary: { $gte: 500000 },
+        })
+          .skip(skip)
+          .limit(PAGE_SIZE)
+          .lean()
+          .exec();
+      } else if (_salary == '0') {
+        jobs = await Job.find({
+          category: { $regex: _category, $options: 'i' },
+          location: { $in: locationArray },
+          salary: { $lte: 500000 },
+        })
+          .skip(skip)
+          .limit(PAGE_SIZE)
+          .lean()
+          .exec();
+      } else {
+        jobs = await Job.find({
+          category: { $regex: _category, $options: 'i' },
+          location: { $in: locationArray },
+        })
+          .skip(skip)
+          .limit(PAGE_SIZE)
+          .lean()
+          .exec();
+      }
     }
 
     if (jobs.length == 0) {
       noMatch = true;
-    }
-    else {
+    } else {
       total = jobs.length;
-      for(var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
-        totalPage.push({page: i + 1});
+      for (var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
+        totalPage.push({ page: i + 1 });
       }
     }
 
@@ -294,7 +319,7 @@ class JobController {
       _category,
       _location,
       _salary,
-    }
+    };
     res.render('filter');
   }
 }
