@@ -221,10 +221,49 @@ class JobController {
     let noMatch = false;
     const PAGE_SIZE = 5;
 
-    console.log(_salary);
-
     var total;
     var totalPage = [];
+
+    if (locationArray[0] == '') {
+      if (_salary == '1') {
+        total = await Job.countDocuments({
+          category: { $regex: _category, $options: 'i' },
+          salary: { $gte: 500000 },
+        });
+      } else if (_salary == '0') {
+        total = await Job.countDocuments({
+          category: { $regex: _category, $options: 'i' },
+          salary: { $lte: 500000 },
+        });
+      } else {
+        total = await Job.countDocuments({
+          category: { $regex: _category, $options: 'i' },
+        });
+      }
+    } else {
+      if (_salary == '1') {
+        total = await Job.countDocuments({
+          category: { $regex: _category, $options: 'i' },
+          location: { $in: locationArray },
+          salary: { $gte: 500000 },
+        });
+      } else if (_salary == '0') {
+        total = await Job.countDocuments({
+          category: { $regex: _category, $options: 'i' },
+          location: { $in: locationArray },
+          salary: { $lte: 500000 },
+        });
+      } else {
+        total = await Job.countDocuments({
+          category: { $regex: _category, $options: 'i' },
+          location: { $in: locationArray },
+        });
+      }
+    }
+
+    for (var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
+      totalPage.push({ page: i + 1 });
+    }
 
     var page = req.query.page;
     if (page) {
@@ -297,11 +336,6 @@ class JobController {
 
     if (jobs.length == 0) {
       noMatch = true;
-    } else {
-      total = jobs.length;
-      for (var i = 0; i <= (total - 1) / PAGE_SIZE; ++i) {
-        totalPage.push({ page: i + 1 });
-      }
     }
 
     const categories = await Category.find({}).lean().exec();
