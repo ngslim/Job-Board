@@ -18,7 +18,7 @@ app.use(
   })
 );
 
-//Jenkins testaaa
+//Jenkins test
 //HTTP logger
 // app.use(morgan('combined'));
 
