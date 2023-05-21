@@ -1,0 +1,30 @@
+.container-order-control {
+  position: absolute;
+  top: calc(var(--height-header) + 15px);
+  left: calc(var(--width-sidebar) + 10px);
+  width: calc(100% - var(--width-sidebar) - 10px);
+  transition: var(--tran-05);
+}
+
+.order-info {
+  background-color: var(--white-color);
+  width: 100%;
+  padding: 16px;
+}
+
+.btn-status {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-status:hover {
+  cursor: default;
+}
+
+.btn-confirm {
+  width: 120px;
+  background-color: var(--primary-color) !important;
+}
+
+.btn-confirm:hover {
+  background-color: var(--primary-color-hover) !important;
+}

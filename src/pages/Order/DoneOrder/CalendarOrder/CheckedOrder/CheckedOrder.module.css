@@ -1,0 +1,8 @@
+.checked-day {
+  background-color: var(--primary-color-hover);
+  color: var(--white-color);
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+}

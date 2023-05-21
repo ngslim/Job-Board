@@ -1,0 +1,144 @@
+.summary-page {
+  background-color: var(--bg-grey-color);
+}
+
+.summary-profile {
+  width: "30%";
+}
+
+.summary-profile .img-profile {
+  width: 250px;
+  height: 250px;
+  background-color: #d9d9d9;
+  border-radius: 125px;
+}
+
+.btn-confirm {
+  color: var(--user-color);
+  border: none;
+  background-color: var(--white-color);
+  height: 50px;
+  width: fit-content;
+  padding: 6px 20px;
+  margin-right: 8px;
+}
+
+.form-location {
+  margin: 10px;
+  color: #fff;
+}
+
+.icon-cancel {
+  position: relative;
+  top: -50%;
+  left: 90%;
+  color: var(--black-color);
+}
+
+.icon-cancel:hover {
+  cursor: pointer;
+}
+
+.google-map .info {
+  width: 100%;
+}
+
+.google-map .info i {
+  font-size: 20px;
+  float: left;
+  width: 44px;
+  height: 44px;
+  background: #cda45e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.google-map .info h4 {
+  padding: 0 0 0 60px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.google-map .info p {
+  padding: 0 0 0 60px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #bab3a6;
+}
+
+.google-map .info .distance,
+.google-map .info .duration {
+  margin-top: 40px;
+}
+
+.google-map .info .location-center {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.google-map .info .location-center:hover {
+  cursor: pointer;
+}
+
+.google-map input {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  border-radius: 10px;
+  border-color: #625b4b;
+  color: black;
+}
+
+.google-map input::-moz-placeholder {
+  color: #a49b89;
+}
+
+.google-map input::placeholder {
+  color: #a49b89;
+}
+
+.google-map input:focus {
+  border-color: #cda45e;
+}
+
+.google-map input {
+  height: 44px;
+}
+
+.google-map button[type="submit"] {
+  background: #cda45e;
+  border: 0;
+  padding: 10px 35px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.google-map button[type="submit"]:hover {
+  background: #d3af71;
+}
+
+@-webkit-keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

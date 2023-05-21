@@ -1,0 +1,14 @@
+.grid-calendar {
+  display: grid;
+  grid-template-columns: repeat(9, calc(100% / 9));
+}
+
+.month {
+  background-color: var(--primary-color-light);
+  height: 350px;
+}
+
+.month-text {
+  transform: rotate(-90deg);
+  font-size: 30px;
+}

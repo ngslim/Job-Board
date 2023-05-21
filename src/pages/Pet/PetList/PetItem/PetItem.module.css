@@ -1,0 +1,39 @@
+.pet-item {
+  max-height: fit-content;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.pet-item .img-pet-card {
+  height: auto;
+  background-color: #bce1d6;
+}
+
+.pet-item .img-pet-card:hover {
+  cursor: pointer;
+}
+
+.description-item {
+  min-width: 60%;
+}
+
+.description-item:hover {
+  cursor: pointer;
+}
+
+.pet-item .body-pet-card {
+  width: 100%;
+  min-height: 64px;
+  background-color: var(--primary-color);
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+.btn-pet-card {
+  width: 140px;
+}
+
+.btn-pet-card:hover {
+  color: var(--white-color);
+  background-color: var(--primary-color-hover);
+}

@@ -1,0 +1,12 @@
+.breadcrumb-item {
+  cursor: pointer;
+}
+
+.breadcrumb-item.current {
+  font-weight: 700 !important;
+  color: var(--white-color);
+}
+
+.breadcrumb-item.current.doctor {
+  color: var(--dark-doctor-color);
+}

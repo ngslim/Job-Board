@@ -1,0 +1,36 @@
+.page-order {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  margin-top: var(--height-header);
+  margin-bottom: var(--height-footer);
+  width: 100%;
+}
+
+.home {
+  position: absolute;
+  top: 0;
+  left: var(--width-sidebar);
+  width: calc(100% - var(--width-sidebar));
+  background-color: var(--body-color);
+  transition: var(--tran-05);
+}
+
+.home .text {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--text-color);
+  padding: 12px 60px;
+}
+
+.content {
+  padding-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+}

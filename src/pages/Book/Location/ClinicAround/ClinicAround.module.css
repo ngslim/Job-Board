@@ -1,0 +1,27 @@
+.container-clinic-around {
+  background-color: var(--primary-color-light);
+  height: auto;
+}
+
+.grid-clinic {
+  display: grid !important;
+  grid-template-columns: repeat(1);
+  row-gap: 20px;
+}
+
+.head-view-more {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.view-more {
+  color: var(--white-color);
+  font-size: large;
+  margin-right: 2rem;
+  text-decoration: underline;
+}
+
+.view-more:hover {
+  cursor: pointer;
+}
