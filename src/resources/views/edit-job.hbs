@@ -1,0 +1,188 @@
+<div class='row bg-variant justify-content-center'>
+  <div
+    class='col-12 text-light text-center justify-content-center mb-5 mt-5'
+    style='font-size: 48px; font-weight:500;'
+  >
+    Chỉnh sửa công việc
+  </div>
+</div>
+<div class='container-fluid d-flex justify-content-center mt-5 mb-5'>
+  <div class='card w-100'>
+    <div class='card-body'>
+      <div class='col-12'>
+        <form method='post' action='/explore/save-edit-job?_id={{job._id}}'>
+          <div class='row mb-5'>
+            <div class='col-12 col-md-3 border-end'>
+              <h3><b>Tên công việc:</b></h3>
+            </div>
+            <div class='col-12 col-md-9'>
+              <h3>
+                <input
+                  class='w-100'
+                  id='name'
+                  name='name'
+                  type='text'
+                  value='{{job.name}}'
+                  required
+                />
+              </h3>
+            </div>
+          </div>
+          <div class='row mb-5'>
+            <div class='col-12 col-md-3 border-end'>
+              <h3><b>Mô tả:</b></h3>
+            </div>
+            <div class='col-12 col-md-9'>
+              <h3>
+                <textarea
+                  id='description'
+                  name='description'
+                  rows='4'
+                  class='w-100'
+                  required
+                >{{job.description}}</textarea>
+              </h3>
+            </div>
+          </div>
+          <div class='row mb-5'>
+            <div class='col-12 col-md-3 border-end'>
+              <h3><b>Lương:</b></h3>
+            </div>
+            <div class='col-12 col-md-9'>
+              <div class='row'>
+                <div class='col-12 col-md-5 border-end'>
+                  <h3>
+                    <input
+                      class='w-75'
+                      id='salary'
+                      name='salary'
+                      type='number'
+                      value='{{job.salary}}'
+                      required
+                    />
+                    VNĐ
+                  </h3>
+                </div>
+                <div class='col-12 col-md-7'>
+                  <h3>
+                    <input
+                      class='form-check-input'
+                      type='radio'
+                      name='type'
+                      id='hourly'
+                      value='hourly'
+                      {{#eq job.type "hourly"}} checked {{/eq}}
+                    />
+                    <label class='form-check-label' for='hourly'>
+                      Theo giờ
+                    </label>
+                    &emsp;
+                    <input
+                      class='form-check-input'
+                      type='radio'
+                      name='type'
+                      id='project'
+                      value='project'
+                      {{#eq job.type "project"}} checked {{/eq}}
+                    />
+                    <label class='form-check-label' for='project'>
+                      Theo dự án
+                    </label>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='row mb-5'>
+            <div class='col-12 col-md-3 border-end'><h3><b>Địa chỉ:</b></h3></div>
+            <div class='col-12 col-md-9'>
+              <h3>
+                <textarea
+                  id='address'
+                  name='address'
+                  rows='2'
+                  class='w-100'
+                  required
+                >{{job.address}}</textarea>
+              </h3>
+            </div>
+          </div>
+          <div class='row mb-5'>
+            <div class='col-12 col-md-3 border-end'>
+              <h3><b>Vị trí:</b></h3>
+            </div>
+            <div id="current-location" hidden>{{job.location}}</div>
+            <div class='col-12 col-md-9'>
+              <h3>
+                <select
+                  id='location'
+                  name='location'
+                  class='form-select form-select-lg mb-3'
+                  aria-label='.form-select-lg example'
+                >
+                  {{#each locations}}
+                    <option value='{{this.name}}'>{{this.name}}</option>
+                  {{/each}}
+                </select>
+              </h3>
+            </div>
+          </div>
+          <div class='row mb-5'>
+            <div class='col-12 col-md-3 border-end'><h3><b>Danh mục:</b></h3></div>
+            <div id="current-category" hidden>{{job.category}}</div>
+            <div class='col-12 col-md-9'>
+              <h3>
+                <select
+                  id='category'
+                  name='category'
+                  class='form-select form-select-lg mb-3'
+                  aria-label='.form-select-lg example'
+                >
+                  {{#each categories}}
+                    <option value='{{this.name}}'>{{this.name}}</option>
+                  {{/each}}
+                </select>
+              </h3>
+            </div>
+          </div>
+          <input
+            id='posted-by'
+            name='posted_by'
+            type='text'
+            value='{{session.User.username}}'
+            hidden
+          />
+          <div class='d-flex justify-content-center'>
+            <button class='job-button bg-variant' type='submit'>LƯU</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var locations = document.getElementById('location');
+    var categories = document.getElementById('category');
+    var selected = 0;
+    var currentLocation = document.getElementById('current-location').innerHTML;
+    var currentCategory = document.getElementById('current-category').innerHTML;
+
+    for (let i = 0; i < locations.length; i++)
+    {
+        if(locations.options[i].value == currentLocation)
+        {
+            selected = i;
+        }
+    }
+    locations.options[selected].selected = true;
+
+    for (let i = 0; i < categories.length; i++)
+    {
+        if(categories.options[i].value == currentCategory)
+        {
+            selected = i;
+        }
+    }
+    categories.options[selected].selected = true;
+</script>

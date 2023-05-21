@@ -1,0 +1,64 @@
+<div class='row bg-variant justify-content-center'>
+  <div class='col-12 text-light text-center justify-content-center mb-5 mt-5' style='font-size: 48px; font-weight:500;'>
+    Thông tin công việc
+  </div>
+</div>
+<div class='container-fluid d-flex justify-content-center mt-5 mb-5'>
+  <div class='card w-100'>
+    <div class='card-body'>
+      <div class='col-12'>
+        <form method='post' action='/apply/apply-job?_id={{job._id}}'>
+          <div class='row'>
+            <div class='col-12 col-md-3 border-end'>
+              <div class='d-flex justify-content-center'>
+                <h4><b>Đăng bởi: </b><a href="/profile?q={{job.posted_by}}">{{job.posted_by}}</a></h4>
+                <input name='job_owner' value={{job.posted_by}} hidden />
+              </div>
+              <div class='d-flex justify-content-center'>
+                <div class='text-center'>
+                  <h5><b>Vào lúc: </b>{{job.created}}</h5>
+                </div>
+              </div>
+              <div class='d-flex justify-content-center mb-5'>
+                <button class='apply-button' type='submit'>ỨNG TUYỂN</button>
+              </div>
+            </div>
+            <div class='col-12 col-md-9'>
+              <div class='row mb-4'>
+                <div class='d-flex justify-content-center'>
+                  <h1><b>{{job.name}}</b></h1>
+                </div>
+              </div>
+              <div class='row mb-5'>
+                <div class='d-flex justify-content-center'>
+                  <h5><a href="/explore/filter?categoryInput={{job.category}}&locationInput=&salaryInput=&page=">
+                      {{job.category}}</a></h5>
+                </div>
+              </div>
+              <div class='row mb-5'>
+                <div class='col-12 col-md-9 border-end'>
+                  <h4>{{job.description}}
+                  </h4>
+                </div>
+                <div class='col-12 col-md-3'>
+                  <h4><b>Vị trí: </b><a
+                      href="/explore/filter?categoryInput=&locationInput={{job.location}}&salaryInput=&page=">
+                      {{job.location}}</a></h4>
+                  <h4><b>Lương: </b>{{job.salary}}</h4>
+                </div>
+              </div>
+              <div class='row mb-5'>
+                <div class='col-12'>
+                  <h4>
+                    <b>Địa chỉ: </b>
+                    {{job.address}}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,0 @@
-.container-menu {
-  position: absolute;
-  top: calc(var(--height-header) + 4px);
-  left: 0;
-  height: 100%;
-}

@@ -1,0 +1,183 @@
+<div class='row bg-variant justify-content-center'>
+  <div class='col-12 text-light text-center justify-content-center mb-5 mt-5' style='font-size: 48px; font-weight:500;'>
+    Lựa chọn công việc của bạn
+  </div>
+</div>
+<div class='container-fluid mt-5 mb-5'>
+  <div class='row'>
+    <div class='col-12 col-xl-2 mb-3'>
+      <div class='card'>
+        <div class='card-body'>
+          <h5 class='card-title'>Lọc tìm kiếm</h5>
+          <p class='card-text'><em>Bạn đang tìm một công việc thế nào?</em></p>
+        </div>
+        <ul class='list-group list-group-flush'>
+          <li class='list-group-item'>
+            <h5>Danh mục</h5>
+            <div class='list-group list-group-flush'>
+              {{#each categories}}
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="categories" id="category-{{this.name}}"
+                  value="{{this.name}}">
+                <label class="form-check-label" for="category-{{this.name}}">
+                  {{this.name}}
+                </label>
+              </div>
+              {{!-- <a href='/explore/search?category={{this.name}}' class='list-group-item'>
+                {{this.name}}
+              </a> --}}
+              {{/each}}
+            </div>
+          </li>
+          <li class='list-group-item'>
+            <h5>Vị trí</h5>
+            {{#each locations}}
+            <div class='form-check'>
+              <input class='form-check-input' type='checkbox' value='{{this.name}}' id='flex-{{this.name}}'
+                name='locations' />
+              <label class='form-check-label' for='flex-{{this.name}}'>
+                {{this.name}}
+              </label>
+            </div>
+            {{/each}}
+          </li>
+          <li class='list-group-item'>
+            <h5>Lương</h5>
+            <div class='form-check'>
+              <input class='form-check-input' type='radio' name='salary' id='flexRadioDefault1' value='0' />
+              <label class='form-check-label' for='flexRadioDefault1'>
+                &lt500000đ
+              </label>
+            </div>
+            <div class='form-check'>
+              <input class='form-check-input' type='radio' name='salary' id='flexRadioDefault2' value='1' />
+              <label class='form-check-label' for='flexRadioDefault2'>
+                >500000đ
+              </label>
+            </div>
+          </li>
+          <li class='list-group-item'>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary btn-sm" id='submit-filter'>Tìm kiếm</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class='col-12 col-xl-10 mb-3'>
+      <div class='row'>
+        <div class='d-flex justify-content-center'>
+          <form class='w-50' method='GET' action='/explore/search'>
+            <div class='input-group input-group-lg'>
+              <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' name='name' />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class='card'>
+        {{#if noMatch}}
+        <div class='list-group list-group-flush'>
+          <div class='list-group-item'>
+            <div class='row'>
+              <div class='d-flex justify-content-center'>
+                <h5>
+                  <em>Không tìm thấy công việc phù hợp.</em>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+        <div class='list-group list-group-flush'>
+          {{#each jobs}}
+          <div class='list-group-item'>
+            <a href='/explore/job?_id={{this._id}}'>
+              <h3>{{this.name}}</h3>
+            </a>
+            <a href="/explore/filter?categoryInput={{this.category}}&locationInput=&salaryInput=&page=">
+              <p><em>{{this.category}}</em></p>
+            </a>
+            <p>{{this.description}}</p>
+            <h5><b>Lương:&nbsp;</b>{{this.salary}}</h5>
+            <h5><b>Vị trí:&nbsp;</b><a
+                href="/explore/filter?categoryInput=&locationInput={{this.location}}&salaryInput=&page=">
+                {{this.location}}</h5></a>
+            <h5><b>Đăng bởi:&nbsp;<a href="/profile?q={{this.posted_by}}"></b>{{this.posted_by}}</h5></a>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='d-flex justify-content-center'>
+    <nav aria-label='Page navigation example'>
+      <ul class='pagination'>
+        {{#each totalPage}}
+        <li class='page-item'><button class='page-link page-number' value='{{this.page}}'>{{this.page}}</button></li>
+        {{/each}}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+{{!-- GET hidden form --}}
+<form method='GET' action='/explore/filter' name='filter'>
+  <input type='hidden' name='categoryInput' value='{{_category}}' />
+  <input type='hidden' name='locationInput' value='{{_location}}' />
+  <input type='hidden' name='salaryInput' value='{{_salary}}' />
+  <input type='hidden' name='page' value='' />
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    var category = '';
+    var location = [];
+    var salary = '';
+    var filter = document.forms['filter'];
+    var filterPage = document.forms['filter-page'];
+    var submitButton = document.getElementById('submit-filter');
+
+    $('input[name="categories"]').on('change', function (e) {
+      category = e.target.value;
+      //checkValidation(category, location, salary);
+    });
+
+    $('input[name="locations"]').on('change', function () {
+      location.length = 0;
+
+      $.each($("input[name='locations']:checked"), function () {
+        location.push($(this).val());
+      });
+
+      //checkValidation(category, location, salary);
+    });
+
+    $('input[name="salary"]').on('change', function (e) {
+      salary = e.target.value;
+      //checkValidation(category, location, salary);
+    });
+
+    $('.page-number').on('click', function () {
+      var _page = $(this).val();
+      $('input[name="page"]').val(_page);
+      filter.submit();
+    })
+
+    submitButton.onclick = function () {
+      $('input[name="categoryInput"]').val(category);
+      $('input[name="locationInput"]').val(location);
+      $('input[name="salaryInput"]').val(salary);
+      filter.submit();
+      console.log('submit');
+    }
+
+    function checkValidation(category, location, salary) {
+      if (category !== '' && salary !== '' && location.length !== 0) {
+        submitButton.removeAttribute('disabled');
+      }
+      else {
+        submitButton.setAttribute('disabled', 'true');
+      }
+    }
+  });
+</script>
